@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Web.Models.Contact
+
+@{
     ViewBag.Title = "AdrenalinaBit";
     Layout = null;
 }
@@ -436,36 +438,53 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3>Dejanos un mensaje</h3>
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    
+                    @using (Html.BeginForm("HandleForm", "Contact"))
+                    {
+
+                    <!--<form name="sentMessage" id="contactForm" novalidate>-->
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label>Nombre Completo:</label>
+                                @Html.LabelFor(contact => contact.Name, new { @class = "control-label" })
+                                @Html.ValidationMessageFor(contact => contact.Name)
+                                @Html.TextBoxFor(contact => contact.Name, new { @class = "form-control" })
+                                @*<label>Nombre Completo:</label>
                                 <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
-                                <p class="help-block"></p>
+                                <p class="help-block"></p>*@
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label>Tel&eacute;fono:</label>
-                                <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                @Html.LabelFor(contact => contact.Phone, new { @class = "control-label" })
+                                @Html.ValidationMessageFor(contact => contact.Phone)
+                                @Html.TextBoxFor(contact => contact.Phone, new { @class = "form-control" })
+                                @*<label>Tel&eacute;fono:</label>
+                                <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">*@
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label>Mail:</label>
-                                <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
+                                @Html.LabelFor(contact => contact.Email, new { @class = "control-label" })
+                                @Html.ValidationMessageFor(contact => contact.Email)
+                                @Html.TextBoxFor(contact => contact.Email, new { @class = "form-control" })
+                                @*<label>Mail:</label>
+                                <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">*@
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label>Mensaje:</label>
-                                <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                                @Html.LabelFor(contact => contact.Message, new { @class = "control-label" })
+                                @Html.ValidationMessageFor(contact => contact.Message)
+                                @Html.TextAreaFor(contact => contact.Message, new { @class = "form-control" })
+                                @*<label>Mensaje:</label>
+                                <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>*@
                             </div>
                         </div>
                         <div id="success"></div>
                         <!-- For success/fail messages -->
                         <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>
+                    <!-- </form> -->
+                    }
                 </div>
             </div>
             <!-- /.row -->
@@ -485,6 +504,10 @@
             </div>
         </div>
     </footer>
+    
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
     <!-- jQuery -->
     <script src="Scripts\jquery-1.9.1.js"></script>
@@ -494,8 +517,8 @@
 
     <!-- Contact Form JavaScript -->
     <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
-    <script src="Scripts/jqBootstrapValidation.js"></script>
-    <script src="Scripts/contact_me.js"></script>
+    @*<script src="Scripts/jqBootstrapValidation.js"></script>
+    <script src="Scripts/contact_me.js"></script>*@
 
     <!-- Custom Theme JavaScript -->
     <script>
